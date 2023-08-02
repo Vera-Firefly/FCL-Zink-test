@@ -71,7 +71,8 @@ static void makeContextCurrentOSMesa(_GLFWwindow* window)
 
         window->context.Clear = (PFNGLCLEAR) window->context.getProcAddress("glClear");
         window->context.ClearColor = (PFNGLCLEARCOLOR) window->context.getProcAddress("glClearColor");
-        if (!window->context.Clear || !window->context.ClearColor) {
+        window->context.ReadPixels = (PFNGLREADPIXELS) window->context.getProcAddress("glReadPixels");
+        if (!window->context.Clear || !window->context.ClearColor || !window->context.ReadPixels) {
             _glfwInputError(GLFW_PLATFORM_ERROR, "Entry point retrieval is broken");
             return;
         }
@@ -79,15 +80,8 @@ static void makeContextCurrentOSMesa(_GLFWwindow* window)
         window->context.Clear(GL_COLOR_BUFFER_BIT);
         window->context.ClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 
-        if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") != 0) {
-            window->context.ReadPixels = (PFNGLREADPIXELS) window->context.getProcAddress("glReadPixels");
-            if (!window->context.ReadPixels) {
-                _glfwInputError(GLFW_PLATFORM_ERROR, "Entry point retrieval is broken");
-                return;
-            }
-            int pixelsArr[4];
-            window->context.ReadPixels(0, 0, 1, 1, GL_RGB, GL_INT, &pixelsArr);
-        }
+        int pixelsArr[4];
+        window->context.ReadPixels(0, 0, 1, 1, GL_RGB, GL_INT, &pixelsArr);
 
         window->context.swapBuffers(window);
     }
@@ -162,11 +156,7 @@ GLFWbool _glfwInitOSMesa(void)
     if (_glfw.osmesa.handle)
         return GLFW_TRUE;
 
-    if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") == 0) {
-        _glfw.osmesa.handle = _glfw_dlopen("libOSMesa_8.so");
-    } else {
-        _glfw.osmesa.handle = _glfw_dlopen("libOSMesa.so");
-    }
+    _glfw.osmesa.handle = _glfw_dlopen("libOSMesa_8.so");
 
     if (!_glfw.osmesa.handle)
     {
