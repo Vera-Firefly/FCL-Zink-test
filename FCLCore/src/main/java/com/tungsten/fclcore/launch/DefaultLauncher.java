@@ -111,9 +111,9 @@ public class DefaultLauncher extends Launcher {
         res.addDefault("-Dfml.ignorePatchDiscrepancies=", "true");
 
         // LWJGL debug mode
-        // res.addDefault("-Dorg.lwjgl.util.Debug=", "true");
-        // res.addDefault("-Dorg.lwjgl.util.DebugLoader=", "true");
-        // res.addDefault("-Dorg.lwjgl.util.DebugFunctions=", "true");
+        res.addDefault("-Dorg.lwjgl.util.Debug=", "true");
+        res.addDefault("-Dorg.lwjgl.util.DebugLoader=", "true");
+        res.addDefault("-Dorg.lwjgl.util.DebugFunctions=", "true");
 
         // FCL specific args
         JavaVersion javaVersion = options.getJava().getId() == 0 ? JavaVersion.getSuitableJavaVersion(version) : options.getJava();
