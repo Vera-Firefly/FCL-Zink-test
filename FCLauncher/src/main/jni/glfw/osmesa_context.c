@@ -102,7 +102,7 @@ static void makeContextCurrentOSMesa(_GLFWwindow* window)
         window->context.Clear(GL_COLOR_BUFFER_BIT);
         window->context.ClearColor(0.4f, 0.4f, 0.4f, 1.0f);
 
-        if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") != 0) {
+        if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") == 0) {
             window->context.ReadPixels = (PFNGLREADPIXELS) window->context.getProcAddress("glReadPixels");
             if (!window->context.ReadPixels) {
                 _glfwInputError(GLFW_PLATFORM_ERROR, "Entry point retrieval is broken");
