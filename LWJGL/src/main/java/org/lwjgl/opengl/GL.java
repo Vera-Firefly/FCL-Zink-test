@@ -348,7 +348,7 @@ public final class GL {
         GLCapabilities caps = null;
 
         try {
-            if (System.getProperty("org.lwjgl.opengl.libname", "").equals("libOSMesa_8.so")) {
+            if (System.getProperty("org.lwjgl.opengl.libname", "").equals("libOSMesa_8.so") || System.getProperty("org.lwjgl.opengl.libname", "").equals("libOSMesa.so")) {
                 long window = GLFW.glfwGetCurrentContext();
                 callJPI(GLFW.glfwGetOSMesaCurrentContext(), GLFW.glfwGetGraphicBuffersAddr(window), GL_UNSIGNED_BYTE, GLFW.glfwGetOSMesaWidth(), GLFW.glfwGetOSMesaHeight(), functionProvider.getFunctionAddress("OSMesaMakeCurrent"));
             }
