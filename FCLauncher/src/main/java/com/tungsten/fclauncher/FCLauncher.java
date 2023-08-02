@@ -123,7 +123,6 @@ public class FCLauncher {
         envMap.put("HOME", config.getLogDir());
         envMap.put("JAVA_HOME", config.getJavaPath());
         envMap.put("FCL_NATIVEDIR", config.getContext().getApplicationInfo().nativeLibraryDir);
-        envMap.put("TMPDIR", config.getContext().getCacheDir().getAbsolutePath());
     }
 
     private static void addRendererEnv(FCLConfig config, HashMap<String, String> envMap) {

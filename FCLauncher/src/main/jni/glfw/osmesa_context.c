@@ -8,35 +8,12 @@
 
 #include <internal.h>
 #include <android/native_window.h>
-#include <android/log.h>
-#include "driver.h"
 
 int (*vtest_main) (int argc, char** argv);
 void (*vtest_swap_buffers) (void);
 
 ANativeWindow_Buffer buf;
 int32_t stride;
-
-static void setVulkanPtr(void* handle) {
-    char envval[64];
-    setenv("VULKAN_PTR", envval, 1);
-}
-
-static void loadVulkan() {
-    if (getenv("FORCE_SYSTEM_DRIVER") == NULL) {
-#ifdef ADRENO_POSSIBLE
-        void* result = loadTurnipVulkan();
-        if (result != NULL) {
-            __android_log_print(ANDROID_LOG_ERROR, "FCL", "Load Turnip Vulkan!");
-            setVulkanPtr(result);
-            return;
-        }
-#endif
-    }
-    __android_log_print(ANDROID_LOG_ERROR, "FCL", "Load System Vulkan!");
-    void* vulkan_handle = dlopen("libvulkan.so", RTLD_LAZY | RTLD_LOCAL);
-    setVulkanPtr(vulkan_handle);
-}
 
 void* makeContextCurrentEGL(void* win) {
     _GLFWwindow* window = win;
@@ -185,12 +162,9 @@ GLFWbool _glfwInitOSMesa(void)
     if (_glfw.osmesa.handle)
         return GLFW_TRUE;
 
-    const char *renderer = getenv("LIBGL_STRING");
-
-    if (strcmp(renderer, "VirGLRenderer") == 0) {
+    if (strcmp(getenv("LIBGL_STRING"), "VirGLRenderer") == 0) {
         _glfw.osmesa.handle = _glfw_dlopen("libOSMesa_8.so");
     } else {
-        loadVulkan();
         _glfw.osmesa.handle = _glfw_dlopen("libOSMesa.so");
     }
 
@@ -217,6 +191,7 @@ GLFWbool _glfwInitOSMesa(void)
     _glfw.osmesa.GetProcAddress = (PFN_OSMesaGetProcAddress)
         _glfw_dlsym(_glfw.osmesa.handle, "OSMesaGetProcAddress");
 
+    const char *renderer = getenv("LIBGL_STRING");
     if (strcmp(renderer, "VirGLRenderer") == 0) {
         char* fileName = calloc(1, 1024);
         sprintf(fileName, "%s/libvirgl_test_server.so", getenv("FCL_NATIVEDIR"));
