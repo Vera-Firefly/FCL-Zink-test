@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.tungsten.fclauncher'
+    namespace 'com.tungsten.fclauncher.zink'
     compileSdk 33
 
     defaultConfig {
