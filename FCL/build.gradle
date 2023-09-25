@@ -4,11 +4,11 @@ plugins {
 }
 
 android {
-    namespace 'com.tungsten.fcl'
+    namespace 'com.tungsten.fcl.zink'
     compileSdk 33
 
     defaultConfig {
-        applicationId "com.tungsten.fcl"
+        applicationId "com.tungsten.fcl.zink"
         minSdk 26
         targetSdk 33
         versionCode 11
