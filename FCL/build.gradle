@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace 'com.tungsten.fcl.zink'
+    namespace 'com.tungsten.fcl'
     compileSdk 33
 
     defaultConfig {
