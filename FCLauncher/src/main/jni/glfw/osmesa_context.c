@@ -5,7 +5,7 @@
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
-#include <nsbypass.h>
+#include <driver_helper/nsbypass.h>
 
 #include <internal.h>
 #include <android/native_window.h>
