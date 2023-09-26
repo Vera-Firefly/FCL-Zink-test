@@ -54,7 +54,9 @@ LOCAL_SRC_FILES         := glfw/context.c \
                            glfw/osmesa_context.c \
                            glfw/posix_thread.c \
                            glfw/posix_time.c \
-                           glfw/driver_helper/nsbypass.c
+                           glfw/driver_helper/nsbypass.c\
+                           glfw/driver_helper/hook.c
+LOCAL_LDFLAGS           := -z global
 LOCAL_C_INCLUDES        := $(LOCAL_PATH)/fcl/include \
                            $(LOCAL_PATH)/glfw/include
 LOCAL_CFLAGS            := -Wall
@@ -64,14 +66,6 @@ LOCAL_CFLAGS            += -DADRENO_POSSIBLE
 LOCAL_LDLIBS            += -lEGL -lGLESv2
 endif
 include $(BUILD_SHARED_LIBRARY)
-
-#ifeq ($(TARGET_ARCH_ABI), arm64-v8a)
-include $(CLEAR_VARS)
-LOCAL_MODULE            := driver
-LOCAL_SRC_FILES         := driver/hook.c
-LOCAL_LDFLAGS           := -z global
-include $(BUILD_SHARED_LIBRARY)
-#endif
 
 include $(CLEAR_VARS)
 LOCAL_MODULE            := awt_headless
