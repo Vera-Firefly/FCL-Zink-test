@@ -2,6 +2,7 @@
 // Created by Tungsten on 2022/10/11.
 //
 
+#include <EGL/egl.h>
 #include <assert.h>
 #include <string.h>
 #include <stdlib.h>
