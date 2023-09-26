@@ -3,14 +3,9 @@
 //
 
 #include <assert.h>
-#include <EGL/egl.h>
-#include <stdbool.h>
 #include <string.h>
 #include <stdlib.h>
-#include <dlfcn.h>
-#include <android/dlext.h>
 #include <nsbypass.h>
-#include "gl/gl.h"
 
 #include <internal.h>
 #include <android/native_window.h>
