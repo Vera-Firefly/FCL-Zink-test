@@ -345,9 +345,6 @@ GLFWbool _glfwCreateContextOSMesa(_GLFWwindow* window,
                                   const _GLFWfbconfig* fbconfig)
 {
     const char *renderer = getenv("LIBGL_STRING");
-    if (strcmp(renderer, "Zink") == 0) {
-        load_vulkan();
-    }
     if (strcmp(renderer, "VirGLRenderer") == 0) {
         EGLConfig config = malloc(sizeof(EGLConfig));
         EGLint egl_attributes[] = {
