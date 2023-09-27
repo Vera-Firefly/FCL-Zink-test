@@ -7,7 +7,7 @@
 #include <string.h>
 #include <stdlib.h>
 #include <android/dlext.h>
-#include <driver_helper/nsbypass.h>
+#include "driver_helper/nsbypass.h"
 
 #include <internal.h>
 #include <android/native_window.h>
