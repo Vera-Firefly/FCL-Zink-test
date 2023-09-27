@@ -3,7 +3,7 @@ plugins {
 }
 
 android {
-    namespace 'com.tungsten.fclauncher.zink'
+    namespace 'com.tungsten.fclauncher'
     compileSdk 33
 
     defaultConfig {
@@ -18,7 +18,6 @@ android {
         release {
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
-            resValue 'string', 'application_package', 'com.tungsten.fclauncher.zink'
         }
     }
     compileOptions {
