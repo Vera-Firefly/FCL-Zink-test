@@ -263,7 +263,7 @@ GLFWbool _glfwInitOSMesa(void)
     if (strcmp(renderer, "VirGLRenderer") == 0) {
     _glfw.osmesa.handle = _glfw_dlopen("libOSMesa_81.so");
     } else if (strcmp(renderer, "Zink") == 0) {
-    load_vulkan();
+    load_turnip_vulkan();
     _glfw.osmesa.handle = _glfw_dlopen("libOSMesa_8.so");
     }
 
