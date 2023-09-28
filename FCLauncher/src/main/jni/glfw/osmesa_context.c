@@ -16,6 +16,13 @@ void (*vtest_swap_buffers) (void);
 ANativeWindow_Buffer buf;
 int32_t stride;
 
+#ifndef FCL_NSBYPASS_H
+#define FCL_NSBYPASS_H
+
+void* load_turnip_vulkan();
+
+#endif
+
 void* makeContextCurrentEGL(void* win) {
     _GLFWwindow* window = win;
     if (!eglMakeCurrent(_glfw.egl.display,
