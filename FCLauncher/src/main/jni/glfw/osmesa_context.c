@@ -16,13 +16,6 @@ void (*vtest_swap_buffers) (void);
 ANativeWindow_Buffer buf;
 int32_t stride;
 
-#ifndef POJAVLAUNCHER_NSBYPASS_H
-#define POJAVLAUNCHER_NSBYPASS_H
-
-void* load_turnip_vulkan();
-
-#endif
-
 void* makeContextCurrentEGL(void* win) {
     _GLFWwindow* window = win;
     if (!eglMakeCurrent(_glfw.egl.display,
@@ -166,7 +159,7 @@ static void set_vulkan_ptr(void* ptr) {
 }
 
 void load_vulkan() {
-    if(getenv("POJAV_ZINK_PREFER_SYSTEM_DRIVER") == NULL && android_get_device_api_level() >= 28) {
+    if(getenv("FCL_ZINK_PREFER_SYSTEM_DRIVER") == NULL && android_get_device_api_level() >= 28) {
     // the loader does not support below that
 #ifdef ADRENO_POSSIBLE
         void* result = load_turnip_vulkan();
