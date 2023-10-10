@@ -32,6 +32,7 @@
 - [x] Customizable launcher themes and colors
 - [x] And much more!
 
+
 <h1 align="center">Screenshots</h1>
 
 ![GameScreen1](/.github/images/ui_main_light.jpg)
